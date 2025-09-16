@@ -40,7 +40,7 @@ public class JwtAuthFilter extends GenericFilter {
 
         if (token != null) {
 
-            if (!token.substring(0, 7).equals("Bearer")) {
+            if (!token.substring(0, 7).equals("Bearer ")) {
                 throw new AuthenticationServiceException("Bearer 형식이 아닙니다");
             }
             String jwtToken = token.substring(7);
