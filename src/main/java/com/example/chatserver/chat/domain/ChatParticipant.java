@@ -1,4 +1,4 @@
-package com.example.chatserver.member.domain;
+package com.example.chatserver.chat.domain;
 
 import com.example.chatserver.common.domain.BaseTimeEntity;
 import jakarta.persistence.*;
@@ -8,24 +8,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
-public class Member extends BaseTimeEntity {
+public class ChatParticipant extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String email;
-    private String name;
-
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Builder.Default
-    private Role role = Role.USER;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chat_room_id",nullable = false)
+    private ChatRoom chatRoom;
 }
